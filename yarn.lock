@@ -856,7 +856,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.3.1", "@babel/runtime@^7.5.1", "@babel/runtime@^7.7.4", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.3.1", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.4", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4":
   version "7.8.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.7.tgz#8fefce9802db54881ba59f90bb28719b4996324d"
   integrity sha512-+AATMUFppJDw6aiR5NVPHqIQBlV/Pj8wY/EZH+lmvRdUo9xBaz/rF3alAwFJQavvKfeOlPE7oaaDHVbcySbCsg==
@@ -4957,6 +4957,27 @@ https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
+
+i18next-browser-languagedetector@^4.0.2:
+  version "4.0.2"
+  resolved "https://eu.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-wm-fed-team-npm-virtual/i18next-browser-languagedetector/-/i18next-browser-languagedetector-4.0.2.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Fi18next-browser-languagedetector%2F-%2Fi18next-browser-languagedetector-4.0.2.tgz#eb02535cc5e57dd534fc60abeede05a3823a8551"
+  integrity sha1-6wJTXMXlfdU0/GCr7t4Fo4I6hVE=
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+
+i18next-xhr-backend@^3.2.2:
+  version "3.2.2"
+  resolved "https://eu.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-wm-fed-team-npm-virtual/i18next-xhr-backend/-/i18next-xhr-backend-3.2.2.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Fi18next-xhr-backend%2F-%2Fi18next-xhr-backend-3.2.2.tgz#769124441461b085291f539d91864e3691199178"
+  integrity sha1-dpEkRBRhsIUpH1OdkYZONpEZkXg=
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+
+i18next@^19.3.2:
+  version "19.3.2"
+  resolved "https://eu.artifactory.swg-devops.com:443/artifactory/api/npm/wcp-wm-fed-team-npm-virtual/i18next/-/i18next-19.3.2.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Fi18next%2F-%2Fi18next-19.3.2.tgz#a17c3c8bb0dd2d8c4a8963429df99730275b3282"
+  integrity sha1-oXw8i7DdLYxKiWNCnfmXMCdbMoI=
+  dependencies:
+    "@babel/runtime" "^7.3.1"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"

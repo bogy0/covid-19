@@ -8,6 +8,7 @@ import {
   useLocation,
   Link
 } from "react-router-dom"
+import { useTranslation, Trans } from 'react-i18next';
 
 function App() {
   let [persons, setPersons] = useState(4)
@@ -15,6 +16,8 @@ function App() {
   let focusRef = useRef()
   let formRef = useRef()
   let navigate = useNavigate()
+
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (doFocusRef.current === false) {
@@ -35,14 +38,8 @@ function App() {
   return (
     <div id="App">
       <div className="prelude">
-        <h1>Social Distancing</h1>
-        <p>
-          Many people close to me are skeptical that covid-19 is a big deal.
-          I've made this illustration to show how your action will affect you,
-          your household, and the community around you. All equations are based
-          on the latest infection growth and fatality rates of the virus as of
-          March 14, 2020.
-        </p>
+        <h1>{t('title')}</h1>
+        <p>{t('intro')}</p>
       </div>
       <hr />
       <form id="HouseHoldForm" ref={formRef} onSubmit={handleSubmit}>
@@ -52,24 +49,25 @@ function App() {
             ref={arr.length - 1 === index ? focusRef : undefined}
           >
             <span>
-              {index === 0 ? "Your age" : `Household Member ${index}`}:
+              {index === 0 ? t('form.your-age') : t('form.household-member', {index: index})}:
             </span>{" "}
             <AgeSelect defaultValue={index < 2 ? 40 : undefined} />
           </label>
         ))}
         <button type="button" onClick={() => setPersons(persons + 1)}>
-          Add another
+          {t('form.add-another')}
         </button>
-        <button type="submit">Next</button>
+        <button type="submit">{t('form.next')}</button>
       </form>
     </div>
   )
 }
 
 function AgeSelect(props) {
+  const { t } = useTranslation();
   return (
     <select name="ages" {...props}>
-      <option value="UNSET">- set an age</option>
+      <option value="UNSET">{t('form.set-age')}</option>
       {Array.from({ length: 100 }).map((_, index) => (
         <option key={index}>{index}</option>
       ))}
@@ -79,6 +77,8 @@ function AgeSelect(props) {
 
 ////////////////////////////////////////////////////////////////////////////////
 function Infection() {
+  const { t } = useTranslation();
+
   let location = useLocation()
   let navigate = useNavigate()
   let ages = parseAges(location.search)
@@ -90,90 +90,62 @@ function Infection() {
   return (
     <div id="App">
       <div className="prelude">
-        <h1>You're Infected</h1>
-        <p>
-          Let's roll the dice and see if it kills any of your family. It
-          probably won't.
-        </p>
+        <h1>{t('infected.title')}</h1>
+        <p>{t('infected.paragraph1')}</p>
       </div>
       <div id="DiceRolls" className="center">
         {ages.map((age, index) => (
           <DiceRoll key={index} age={age} />
         ))}
       </div>
-      <p>
-        As expected, you probably didn't die. But it's not about you. Let's look
-        at how many people your family is going to kill by not practicing social
-        distancing.
-      </p>
-      <Link className="big-link" to={`/killers${location.search}`}>
-        Your Kill Count ▸
-      </Link>
+      <p>{t('infected.paragraph2')}</p>
+      <Link className="big-link" to={`/killers${location.search}`}>{t('infected.kill-count')}</Link>
 
       <hr />
-      <h2>More information</h2>
+      <h2>{t('infected.more-info')}</h2>
       <p>
-        Unless you're over 60, or are immuno-comprimised{" "}
-        <i>(lots of your friends and family are!)</i> you're going to have to
-        click the button a lot before you die.
+        <Trans i18nKey="infected.paragraph3">
+          Unless you're over 60, or are immuno-comprimised{" "} <i>(lots of your friends and family are!)</i> you're going to have to click the button a lot before you die.
+        </Trans>
       </p>
-      <p>So this is just like the flu, right?</p>
+      {/*TODO: italic formatting in parahraph3*/}
+      <p>{t('infected.paragraph4')}</p>
       <p>
-        Not quite. People have been quoting how many deaths per year there are
-        for the flu (
-        <a href="https://www.cdc.gov/flu/about/burden/index.html#:~:text=">
-          12,000 to 61,000
-        </a>
-        ) to the deaths so far with coronavirus (
-        <a href="https://www.cnn.com/interactive/2020/health/coronavirus-maps-and-cases/">
-          ~50
-        </a>
-        ) in the US.
+        <Trans i18nKey="infected.paragraph5">
+          Not quite. People have been quoting how many deaths per year there are for the flu (<a href="https://www.cdc.gov/flu/about/burden/index.html#:~:text="> 12,000 to 61,000 </a>) to the deaths so far with coronavirus (<a href="https://www.cnn.com/interactive/2020/health/coronavirus-maps-and-cases/">~50</a>) in the US.
+        </Trans>
       </p>
-      <p>
-        To get the full story you usually have to look at more than static
-        numbers. In this case, we need to look at:
-      </p>
+      <p>{t('infected.paragraph6')}</p>
       <ul>
-        <li>Fatality Rate</li>
-        <li>Infection Growth Rate</li>
+        <li>{t('infected.fatality-rate')}</li>
+        <li>{t('infected.infection-growth-rate')}</li>
       </ul>
       <p>
-        The flu has a general fatality rate of 0.1%
-        <br />
-        COVID-19's fatality rate right now is 3.4%
+        <Trans i18nKey="infected.paragraph7">
+          The flu has a general fatality rate of 0.1%<br />COVID-19's fatality rate right now is 3.4%
+        </Trans>
       </p>
       <p>
-        <b>
-          <a href="https://www.sciencealert.com/covid-19-s-death-rate-is-higher-than-thought-but-it-should-drop">
-            That's 34x
-          </a>
-        </b>
-        . The red bar here is 34 times bigger.
+        <Trans i18nKey="infected.paragraph8">
+          <a href="https://www.sciencealert.com/covid-19-s-death-rate-is-higher-than-thought-but-it-should-drop">That's 34x</a>. The red bar here is 34 times bigger.
+        </Trans>
       </p>
 
       <div className="bars">
         <div className="bar covid">
-          <span className="padding-adjust">COVID-19</span>
+          <span className="padding-adjust">{t('infected.covid-19')}</span>
         </div>
         <div className="bar flu">
-          <span className="padding-adjust">Influenza</span>
+          <span className="padding-adjust">{t('infected.influenza')}</span>
         </div>
       </div>
       <p>
-        It's easy to tell this virus is worse even without all the data,{" "}
-        <b>the flu doesn't completely overwhelm the health care system</b> in
-        Italy each year, but{" "}
-        <a href="https://www.theatlantic.com/ideas/archive/2020/03/who-gets-hospital-bed/607807/">
-          that's exactly what coronavirus has done
-        </a>
-        .
+        <Trans i18nKey="infected.paragraph9">
+          It's easy to tell this virus is worse even without all the data, <b>the flu doesn't completely overwhelm the health care system</b> in Italy each year, but <a href="https://www.theatlantic.com/ideas/archive/2020/03/who-gets-hospital-bed/607807/">that's exactly what coronavirus has done</a>.
+        </Trans>
       </p>
-      <p>But still, only ~50 deaths in the US right? What's the big deal?</p>
-      <p>
-        The big deal is mixing a fatality rate that's 34x of the flu with
-        exponential growth.
-      </p>
+      <p>{t('infected.paragraph10')}</p>
+      <p>{t('infected.paragraph11')}</p>
     </div>
   )
 }
@@ -255,6 +227,7 @@ function DiceRoll({ age }) {
 
 ////////////////////////////////////////////////////////////////////////////////
 function KillCount({ ages }) {
+  const { t } = useTranslation();
   let [infected, setInfected] = useState(1)
   let [weeks, setWeeks] = useState(1)
   let rate = 0.034
@@ -275,15 +248,16 @@ function KillCount({ ages }) {
           <span key={index}>💀</span>
         ))}
       </div>
-      <p>Week: {weeks}</p>
-      <p>People You Infected: {infected}</p>
-      <p>People You Killed: {killed}</p>
-      <button onClick={nextWeek}>Live another week</button>
+      <p>{t('killers.form.weeks', {weeks: weeks})}</p>
+      <p>{t('killers.form.infected', {infected: infected})}</p>
+      <p>{t('killers.form.killed', {killed: killed})}</p>
+      <button onClick={nextWeek}>{t('killers.form.next-week')}</button>
     </div>
   )
 }
 
 function Killers() {
+  const { t } = useTranslation()
   let location = useLocation()
   let navigate = useNavigate()
   let ages = parseAges(location.search)
@@ -295,66 +269,40 @@ function Killers() {
   return (
     <div id="App">
       <div className="prelude">
-        <h1>Your Kill Count</h1>
-        <p>
-          Social distancing is about how many people you want to kill (I hope
-          that's zero). Right now, a COVID-19 infected person infects two more.
-        </p>
-        <p>
-          So you infect two people, and next week they infect two people each,
-          and then they infect two more, etc. etc.
-        </p>
-        <p>Go ahead and click the button</p>
+        <h1>{t('killers.title')}</h1>
+        <p>{t('killers.paragraph1')}</p>
+        <p>{t('killers.paragraph2')}</p>
+        <p>{t('killers.paragraph3')}</p>
       </div>
       <KillCount ages={ages} />
       <p>
-        So please, stay home. And while you're there{" "}
-        <a href="https://medium.com/@joschabach/flattening-the-curve-is-a-deadly-delusion-eea324fe9727">
-          I think this article is worth your time.
-        </a>
-        . Containment seems to be the best action right now given the numbers.
+        <Trans i18nKey="killers.paragraph4">
+          So please, stay home. And while you're there <a href="https://medium.com/@joschabach/flattening-the-curve-is-a-deadly-delusion-eea324fe9727">I think this article is worth your time.</a>. Containment seems to be the best action right now given the numbers.
+        </Trans>
       </p>
       <hr />
-      <h2>More information</h2>
+      <h2>{t('killers.more-info')}</h2>
       <p>
-        <Link to={`/infected${location.search}`}>
-          On the previous page we looked at the fatality rate
-        </Link>{" "}
-        of COVID-19 and saw that statistically, you and your family will
-        probably be fine, but social distancing isn't about you.
+        <Trans i18nKey="killers.paragraph5">
+          <Link to={`/infected${location.search}`}>On the previous page we looked at the fatality rate</Link> of COVID-19 and saw that statistically, you and your family will probably be fine, but social distancing isn't about you.
+        </Trans>
       </p>
-      <p>
-        What really sucks about this virus vs. the flu is that you can carry it
-        around with you for weeks infecting people before you even know you have
-        it. There is no way to know until it's too late. That's why containment
-        is so important.
-      </p>
-      <p>
-        You just saw that logarithmic growth is a powerful thing. The
-        coronavirus is following a nearly perfect logarithmic curve in the
-        US--even with our low levels of testing. While network marketers hope to
-        use it in their favor to gain financial independence, a virus doesn't
-        have to be convinced to keep the downline going.
-      </p>
+      <p>{t('killers.paragraph6')}</p>
+      <p>{t('killers.paragraph7')}</p>
       <a
         style={{ display: "block", border: "solid 1px" }}
         href="https://www.worldometers.info/coronavirus/country/us/"
       >
         <img
           style={{ width: "100%" }}
-          alt="graph showing a nearly perfect algorithmic growth rate"
+          alt={t('killers.image-alt-text')}
           src="/graph.png"
         />
       </a>
       <p>
-        The <i>Attack Rate</i> of COVID-19 is estimated by the World Health
-        Organization to be{" "}
-        <a href="https://www.worldometers.info/coronavirus/#repro">
-          between 1.4 and 2.5
-        </a>
-        . That means if you get it, you're going to infect 2 other people (other
-        studies have it as high as 4!). By comparison, the flu is 1.3 and
-        anything less than 1 will just die off.
+        <Trans i18nKey="killers.paragraph8">
+          The <i>Attack Rate</i> of COVID-19 is estimated by the World Health Organization to be <a href="https://www.worldometers.info/coronavirus/#repro">between 1.4 and 2.5</a>. That means if you get it, you're going to infect 2 other people (other studies have it as high as 4!). By comparison, the flu is 1.3 and anything less than 1 will just die off.
+        </Trans>
       </p>
     </div>
   )
