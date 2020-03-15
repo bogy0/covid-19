@@ -2,14 +2,14 @@
   "title": "Social Distancing",
   "intro": "Many people close to me are skeptical that covid-19 is a big deal.\n          I've made this illustration to show how your action will affect you,\n          your household, and the community around you. All equations are based\n          on the latest infection growth and fatality rates of the virus as of\n          March 14, 2020.",
   "form": {
-    "add-another": "Add Another",
-    "next": "Next",
-    "your-age": "Your age",
-    "household-member": "Household Member {{index}}",
-    "set-age":"- set an age"
+    "add-another": "",
+    "next": "Tovább",
+    "your-age": "Életkorod",
+    "household-member": "Háztartásban élő életkora {{index}} ",
+    "set-age":"- életkor megadása"
   },
   "infected": {
-    "title": "You're Infected",
+    "title": "Megfertőződtél",
     "paragraph1": "Let's roll the dice and see if it kills any of your family. It probably won't.",
     "paragraph2": "As expected, you probably didn't die. But it's not about you. Let's look\n        at how many people your family is going to kill by not practicing social\n        distancing.",
     "paragraph3": "Unless you're over 60, or are immuno-comprimised <i>(lots of your friends and family are!)</i> you're going to have to click the button a lot before you die.",
@@ -23,10 +23,10 @@
     "paragraph11": "The big deal is mixing a fatality rate that's 34x of the flu with exponential growth.",
     "covid-19": "COVID-19",
     "influenza": "Influenza",
-    "fatality-rate": "Fatality Rate",
-    "infection-growth-rate": "Infection Growth Rate",
+    "fatality-rate": "Halálozási Ráta",
+    "infection-growth-rate": "Fertőzés Növekedési Ráta",
     "kill-count": "Your Kill Count ▸",
-    "more-info": "More information"
+    "more-info": "További információ"
   },
   "killers": {
     "title": "Your Kill Count",
@@ -41,10 +41,10 @@
     "image-alt-text": "graph showing a nearly perfect algorithmic growth rate",
     "more-info": "More information",
     "form": {
-      "weeks": "Weeks: {{weeks}}",
-      "infected": "People You Infected: {{infected}}",
-      "killed": "People You Killed: {{killed}}",
-      "next-week": "Live another week"
+      "weeks": "{{weeks}} hét",
+      "infected": "Emberek akiket megfertőztél: {{infected}}",
+      "killed": "Emberek akiket megöltél: {{killed}}",
+      "next-week": "Következő hét"
     }
   }
 }
