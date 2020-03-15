@@ -8,10 +8,10 @@ import {
   useLocation,
   Link
 } from "react-router-dom"
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next'
 
 function App() {
-  let [persons, setPersons] = useState(4)
+  let [persons, setPersons] = useState(2)
   let doFocusRef = useRef(false)
   let focusRef = useRef()
   let formRef = useRef()
@@ -37,6 +37,9 @@ function App() {
 
   return (
     <div id="App">
+      <button onClick={() => i18n.changeLanguage('en')}>EN</button>
+      <button onClick={() => i18n.changeLanguage('hu')}>HU</button>
+
       <div className="prelude">
         <h1>{t('title')}</h1>
         <p>{t('intro')}</p>
@@ -51,7 +54,7 @@ function App() {
             <span>
               {index === 0 ? t('form.your-age') : t('form.household-member', {index: index})}:
             </span>{" "}
-            <AgeSelect defaultValue={index < 2 ? 40 : undefined} />
+            <AgeSelect defaultValue={index < 2 ? 30 : undefined} />
           </label>
         ))}
         <button type="button" onClick={() => setPersons(persons + 1)}>
@@ -77,7 +80,7 @@ function AgeSelect(props) {
 
 ////////////////////////////////////////////////////////////////////////////////
 function Infection() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   let location = useLocation()
   let navigate = useNavigate()
@@ -89,6 +92,9 @@ function Infection() {
 
   return (
     <div id="App">
+      <button onClick={() => i18n.changeLanguage('en')}>EN</button>
+      <button onClick={() => i18n.changeLanguage('hu')}>HU</button>
+
       <div className="prelude">
         <h1>{t('infected.title')}</h1>
         <p>{t('infected.paragraph1')}</p>
@@ -257,7 +263,7 @@ function KillCount({ ages }) {
 }
 
 function Killers() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   let location = useLocation()
   let navigate = useNavigate()
   let ages = parseAges(location.search)
@@ -268,6 +274,9 @@ function Killers() {
 
   return (
     <div id="App">
+      <button onClick={() => i18n.changeLanguage('en')}>EN</button>
+      <button onClick={() => i18n.changeLanguage('hu')}>HU</button>
+
       <div className="prelude">
         <h1>{t('killers.title')}</h1>
         <p>{t('killers.paragraph1')}</p>
